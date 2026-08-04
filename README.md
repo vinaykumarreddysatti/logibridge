@@ -9,7 +9,7 @@ Built for the LogiEdge mini-project (AIML ZG535, Modules 1-6).
 ## Repo layout
 
 ```
-mloe-group9-logibridge-assignment/
+logibridge/
 ├── setup.sh                  Run this first -- venv, deps, fixes machine-specific paths
 ├── clean_pipeline_outputs.sh Wipes generated artifacts for a clean re-run
 ├── scenario_architecture/   Task A1/A2 -- constraint analysis, architecture diagram
@@ -27,7 +27,7 @@ mloe-group9-logibridge-assignment/
 ## Setup
 
 ```bash
-cd mloe-group9-logibridge-assignment
+cd logibridge
 ./setup.sh --with-broker
 ```
 
@@ -46,7 +46,7 @@ If you'd rather do it by hand (or `setup.sh` isn't available on your
 platform), the equivalent manual steps are:
 
 ```bash
-cd mloe-group9-logibridge-assignment
+cd logibridge
 python3.11 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
@@ -267,6 +267,45 @@ redeploy:
 docker exec logibridge-inference sha256sum /app/model.tflite
 ```
 
+### Verifying MODEL_PATH hot-swap (no rebuild) and the inference MQTT topic
+
+Task D2 also requires the container to accept `MODEL_PATH` as an env var
+(switching model variants without a rebuild) and to publish results to
+`logibridge/trucks/{truck_id}/inference`. Both already work --
+`inference_service.py` reads `MODEL_PATH` from the environment at
+startup (`inference/inference_service.py`) and publishes to
+`self._topic("inference")`, which resolves to that exact topic. To
+demonstrate both against the **same, already-built image** (no
+`docker build` in between):
+
+```bash
+# terminal 1 -- subscribe to prove the publish target
+mosquitto_sub -h localhost -p 1883 -t 'logibridge/trucks/TRUCK001/inference' -v
+
+# terminal 2 -- run with model variant A, bind-mounted in (not baked into the image)
+docker run --rm \
+  -v "$(pwd)/training/models/model_int8.tflite:/app/models/model_int8.tflite" \
+  -e MODEL_PATH=/app/models/model_int8.tflite \
+  -e MQTT_BROKER=host.docker.internal \
+  -e TRUCK_ID=TRUCK001 \
+  logibridge-inference:latest
+
+# Ctrl+C, then re-run the SAME image with a different variant -- still no rebuild
+docker run --rm \
+  -v "$(pwd)/training/models/model_pruned_int8.tflite:/app/models/model_pruned_int8.tflite" \
+  -e MODEL_PATH=/app/models/model_pruned_int8.tflite \
+  -e MQTT_BROKER=host.docker.internal \
+  -e TRUCK_ID=TRUCK001 \
+  logibridge-inference:latest
+```
+
+Terminal 2's startup line (`[inference] connected, model=/app/models/...`)
+shows the variant switching on each run of the identical image. Terminal
+1 shows inference results landing on the correct topic once the
+simulator (see "Running the pipeline end to end", above) is feeding the
+sensor topics -- without a simulator running, the connect log alone is
+enough to prove `MODEL_PATH` took effect.
+
 ### Optional: watching raw MQTT traffic
 
 MQTT is pub/sub, not a queue -- there's no persisted history to browse,
@@ -474,7 +513,7 @@ shape, and therefore the file size, essentially unchanged).
   Verify you're using the right one:
   ```bash
   ansible-playbook --version | grep "module location"
-  # should print .../mloe-group9-logibridge-assignment/.venv/lib/...,
+  # should print .../logibridge/.venv/lib/...,
   # NOT /opt/anaconda3/... or any other environment
   ```
   `./setup.sh` fixes this every time it's run (regenerates all

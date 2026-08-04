@@ -46,7 +46,7 @@ fi
 # regenerates every entry-point script's shebang against the CURRENT
 # path, fixing direct `pip`/`ansible-playbook` invocations too.
 echo "-- installing requirements"
-"$VENV_PYTHON" -m pip install --quiet --upgrade pip
+"$VENV_PYTHON" -m pip install --quiet --upgrade --force-reinstall pip
 "$VENV_PYTHON" -m pip install --quiet --force-reinstall --no-deps -r requirements.txt
 "$VENV_PYTHON" -m pip install --quiet -r requirements.txt
 
