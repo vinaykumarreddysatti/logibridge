@@ -1,0 +1,31 @@
+=== RUN 2 (idempotent) ===
+
+PLAY [Deploy LogiEdge inference container to truck edge node] ******************
+
+TASK [Gathering Facts] *********************************************************
+ok: [truck-edge-local]
+
+TASK [1. Create /opt/logibridge directory if not present] **********************
+ok: [truck-edge-local]
+
+TASK [2. Copy new model file to /opt/logibridge/model.tflite] ******************
+ok: [truck-edge-local]
+
+TASK [3. Copy updated reference_dist.json] *************************************
+ok: [truck-edge-local]
+
+TASK [4. Stop the running inference container if running] **********************
+skipping: [truck-edge-local]
+
+TASK [5. Pull updated container image from local Docker registry] **************
+ok: [truck-edge-local]
+
+TASK [6. Start inference container with environment variables] *****************
+ok: [truck-edge-local]
+
+TASK [7. Wait 15 seconds and verify container is running] **********************
+ok: [truck-edge-local]
+
+PLAY RECAP *********************************************************************
+truck-edge-local           : ok=7    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+

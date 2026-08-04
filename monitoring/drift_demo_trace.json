@@ -1,0 +1,224 @@
+[
+  {
+    "index": 100,
+    "phase": "clean_before",
+    "psi": 0.0171,
+    "seconds_since_injection": -470
+  },
+  {
+    "index": 106,
+    "phase": "clean_before",
+    "psi": 0.0239,
+    "seconds_since_injection": -410
+  },
+  {
+    "index": 112,
+    "phase": "clean_before",
+    "psi": 0.0447,
+    "seconds_since_injection": -350
+  },
+  {
+    "index": 118,
+    "phase": "clean_before",
+    "psi": 0.0399,
+    "seconds_since_injection": -290
+  },
+  {
+    "index": 124,
+    "phase": "clean_before",
+    "psi": 0.0553,
+    "seconds_since_injection": -230
+  },
+  {
+    "index": 130,
+    "phase": "clean_before",
+    "psi": 0.0519,
+    "seconds_since_injection": -170
+  },
+  {
+    "index": 136,
+    "phase": "clean_before",
+    "psi": 0.0639,
+    "seconds_since_injection": -110
+  },
+  {
+    "index": 142,
+    "phase": "clean_before",
+    "psi": 0.0639,
+    "seconds_since_injection": -50
+  },
+  {
+    "index": 148,
+    "phase": "drift_injected",
+    "psi": 0.0639,
+    "seconds_since_injection": 10
+  },
+  {
+    "index": 154,
+    "phase": "drift_injected",
+    "psi": 0.0615,
+    "seconds_since_injection": 70
+  },
+  {
+    "index": 160,
+    "phase": "drift_injected",
+    "psi": 0.1472,
+    "seconds_since_injection": 130
+  },
+  {
+    "index": 166,
+    "phase": "drift_injected",
+    "psi": 0.2562,
+    "seconds_since_injection": 190
+  },
+  {
+    "index": 172,
+    "phase": "drift_injected",
+    "psi": 0.3407,
+    "seconds_since_injection": 250
+  },
+  {
+    "index": 178,
+    "phase": "drift_injected",
+    "psi": 0.3947,
+    "seconds_since_injection": 310
+  },
+  {
+    "index": 184,
+    "phase": "drift_injected",
+    "psi": 0.5322,
+    "seconds_since_injection": 370
+  },
+  {
+    "index": 190,
+    "phase": "drift_injected",
+    "psi": 0.7231,
+    "seconds_since_injection": 430
+  },
+  {
+    "index": 196,
+    "phase": "drift_injected",
+    "psi": 0.9285,
+    "seconds_since_injection": 490
+  },
+  {
+    "index": 202,
+    "phase": "drift_injected",
+    "psi": 1.1556,
+    "seconds_since_injection": 550
+  },
+  {
+    "index": 208,
+    "phase": "recovery",
+    "psi": 1.2967,
+    "seconds_since_injection": 610
+  },
+  {
+    "index": 214,
+    "phase": "recovery",
+    "psi": 1.2967,
+    "seconds_since_injection": 670
+  },
+  {
+    "index": 220,
+    "phase": "recovery",
+    "psi": 1.165,
+    "seconds_since_injection": 730
+  },
+  {
+    "index": 226,
+    "phase": "recovery",
+    "psi": 1.2013,
+    "seconds_since_injection": 790
+  },
+  {
+    "index": 232,
+    "phase": "recovery",
+    "psi": 1.2013,
+    "seconds_since_injection": 850
+  },
+  {
+    "index": 238,
+    "phase": "recovery",
+    "psi": 1.2418,
+    "seconds_since_injection": 910
+  },
+  {
+    "index": 244,
+    "phase": "recovery",
+    "psi": 1.295,
+    "seconds_since_injection": 970
+  },
+  {
+    "index": 250,
+    "phase": "recovery",
+    "psi": 1.196,
+    "seconds_since_injection": 1030
+  },
+  {
+    "index": 256,
+    "phase": "recovery",
+    "psi": 1.0235,
+    "seconds_since_injection": 1090
+  },
+  {
+    "index": 262,
+    "phase": "recovery",
+    "psi": 0.7927,
+    "seconds_since_injection": 1150
+  },
+  {
+    "index": 268,
+    "phase": "recovery",
+    "psi": 0.593,
+    "seconds_since_injection": 1210
+  },
+  {
+    "index": 274,
+    "phase": "recovery",
+    "psi": 0.4493,
+    "seconds_since_injection": 1270
+  },
+  {
+    "index": 280,
+    "phase": "recovery",
+    "psi": 0.2928,
+    "seconds_since_injection": 1330
+  },
+  {
+    "index": 286,
+    "phase": "recovery",
+    "psi": 0.1678,
+    "seconds_since_injection": 1390
+  },
+  {
+    "index": 292,
+    "phase": "recovery",
+    "psi": 0.0863,
+    "seconds_since_injection": 1450
+  },
+  {
+    "index": 298,
+    "phase": "recovery",
+    "psi": 0.0203,
+    "seconds_since_injection": 1510
+  },
+  {
+    "index": 304,
+    "phase": "recovery",
+    "psi": 0.0012,
+    "seconds_since_injection": 1570
+  },
+  {
+    "index": 310,
+    "phase": "recovery",
+    "psi": 0.0078,
+    "seconds_since_injection": 1630
+  },
+  {
+    "index": 316,
+    "phase": "recovery",
+    "psi": 0.0083,
+    "seconds_since_injection": 1690
+  }
+]

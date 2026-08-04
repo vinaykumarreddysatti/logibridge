@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+alert_log*.jsonl
+
+# MQTT auth secrets / TLS keys -- regenerate with generate_mqtt_credentials.sh
+deployment/mosquitto_passwd.txt
+deployment/certs/

@@ -1,0 +1,40 @@
+<svg width="500" height="350" xmlns="http://www.w3.org/2000/svg">
+  <polygon points="250,40 60,300 440,300"
+           fill="none"
+           stroke="#6A1B9A"
+           stroke-width="3"/>
+
+  <text x="250" y="12" text-anchor="middle"
+        font-size="16" font-weight="bold">
+    <tspan x="250" dy="0" font-weight="bold">
+        Compute Power / Latency SLA
+    </tspan>
+    <tspan x="250" dy="20">
+        (90s Fault Detection Window)
+    </tspan>
+  </text>
+
+  <text x="30" y="320"
+        font-size="16" font-weight="bold">
+    <tspan x="30" dy="0" font-weight="bold">
+        Power Consumption Budget
+    </tspan>
+    <tspan x="30" dy="20">
+        (≤ 10W via 12V DC-DC Supply)
+    </tspan>
+  </text>
+
+  <text x="320" y="320"
+        font-size="16" font-weight="bold">
+    <tspan x="320" dy="0" font-weight="bold">
+        Fleet Unit Cost / CAPEX
+    </tspan>
+    <tspan x="320" dy="20">
+        (85 Pilot → 265 Scale)
+    </tspan>
+  </text>
+
+  <circle cx="60" cy="300" r="8" fill="#FF9800"/>
+  <circle cx="440" cy="300" r="8" fill="#FF9800"/>
+  <circle cx="250" cy="40" r="8" fill="#9C27B0"/>
+</svg>
