@@ -143,9 +143,10 @@ def plot_pareto(results, out_path):
     fig.suptitle("LogiEdge Model Variants (M1 FP32 / M2 PTQ INT8 / M3 Pruned35%+INT8) "
                   "-- Five-Metric Benchmark", fontsize=12, fontweight="bold")
     fig.text(0.5, 0.01,
-              "Accuracy and Critical recall are tied across all variants (803-param baseline); "
+              "Critical-class recall is tied across all variants; accuracy is within one "
+              "sample of a 59-window validation set (M2/M3 INT8 match exactly). "
               "INT8 PTQ (M2) and structured pruning+INT8 (M3, 803->400 params, -50%) "
-              "shrink file size with no accuracy cost.",
+              "shrink file size with no meaningful accuracy cost.",
               ha="center", fontsize=8.5, style="italic")
     fig.tight_layout(rect=[0, 0.05, 1, 0.94])
     fig.savefig(out_path, dpi=150)

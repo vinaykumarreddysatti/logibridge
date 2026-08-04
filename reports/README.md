@@ -1,7 +1,14 @@
 # Reports folder
 
-This folder is where `phase1_report.pdf`, `phase2_report.pdf`, and
-`final_report.pdf` belong for submission (Section 5, Deliverable 3).
+This folder is where `final_report.pdf` belongs for submission. The
+assignment's suggested repo layout (Deliverable 1) also lists
+`phase1_report.pdf`/`phase2_report.pdf` alongside it, but Section 7
+("Submission Requirements") is explicit that the actual graded
+submission is exactly three items -- GitHub repo URL, Demo Video,
+**Final Report PDF** (singular, filename `GROUPNO_LogiEdge_Final.pdf`) --
+with no mention of separate phase deliverables. Phase 1/2, if they
+exist, were earlier Continuous Evaluation checkpoints submitted
+separately during the course, not part of this final repo submission.
 
 ## What's here now vs. what you need to add
 

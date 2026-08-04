@@ -4,11 +4,13 @@
 
 ## Task B1 -- Constraint Triangle
 
-| Option | Hardware | Price/truck | TDP | 265-truck fleet cost |
-|---|---|---|---|---|
-| 1 | Raspberry Pi 5 (8GB) + AI HAT+ (13 TOPS Hailo-8L) | ₹15,000 | 7.5W | ₹39.75 lakh |
-| 2 | Jetson Orin Nano Super Dev Kit (67 TOPS) | ₹45,000 | 15W (moderate load) | ₹1.19 crore |
-| 3 | STM32H7 custom MCU + sensor ICs | ₹3,500 | 0.4W | ₹9.28 lakh |
+![Constraint Triangle](../scenario_architecture/constraint_triangle.svg)
+
+| Option | Hardware | Price/truck | TDP | 85-truck pilot cost | 265-truck fleet cost |
+|---|---|---|---|---|---|
+| 1 | Raspberry Pi 5 (8GB) + AI HAT+ (13 TOPS Hailo-8L) | ₹15,000 | 7.5W | ₹12.75 lakh | ₹39.75 lakh |
+| 2 | Jetson Orin Nano Super Dev Kit (67 TOPS) | ₹45,000 | 15W (moderate load) | ₹38.25 lakh | ₹1.19 crore |
+| 3 | STM32H7 custom MCU + sensor ICs | ₹3,500 | 0.4W | ₹2.98 lakh | ₹9.28 lakh |
 
 **Dominant constraint: power budget + fleet-scale cost, not compute.**
 The 90-second latency SLA is generous relative to what any of these three

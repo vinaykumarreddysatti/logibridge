@@ -306,6 +306,30 @@ simulator (see "Running the pipeline end to end", above) is feeding the
 sensor topics -- without a simulator running, the connect log alone is
 enough to prove `MODEL_PATH` took effect.
 
+#### Gotcha: `[inference] connected` line seems missing
+
+If terminal 2 shows the `RuntimeWarning: Precision loss occurred in
+moment calculation...` line (from `preprocessing.py`'s kurtosis
+calculation on near-constant vibration data -- harmless, see the
+`np.isnan` guard right after it) but you never see the earlier
+`[inference] connected, model=...` line, this is stdout buffering, not
+a startup or connectivity failure. `docker run` without a TTY
+block-buffers Python's stdout (where `print()` goes), while the
+`warnings` module writes straight to stderr -- so the warning appears
+immediately and the connect log, which actually printed first, sits
+stuck in the buffer.
+
+Fix, either:
+```bash
+# quick: allocate a TTY so stdout is line-buffered
+docker run --rm -t \
+  -e MODEL_PATH=... -e MQTT_BROKER=host.docker.internal -e TRUCK_ID=TRUCK001 \
+  logibridge-inference:latest
+```
+or add `ENV PYTHONUNBUFFERED=1` to `inference/Dockerfile` for logs that
+stream correctly even without `-t` (also fixes `docker logs -f` on a
+detached/Ansible-deployed container).
+
 ### Optional: watching raw MQTT traffic
 
 MQTT is pub/sub, not a queue -- there's no persisted history to browse,

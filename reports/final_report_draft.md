@@ -221,9 +221,9 @@ timed runs after 10 excluded warm-up runs, held-out validation set):
 
 | Variant | Params | Size (KB) | Mean latency (ms) | Accuracy (%) | Critical recall (%) |
 |---|---|---|---|---|---|
-| M1 FP32 baseline | 803 | 5.27 | 0.0007 | 98.31 | 100.0 |
+| M1 FP32 baseline | 803 | 5.27 | 0.0008 | 100.0 | 100.0 |
 | M2 PTQ INT8 | 803 | 4.58 | 0.0008 | 98.31 | 100.0 |
-| M3 Structured-pruned (35%) + INT8 | 400 | 3.84 | 0.0007 | 98.31 | 100.0 |
+| M3 Structured-pruned (35%) + INT8 | 400 | 3.84 | 0.0008 | 98.31 | 100.0 |
 
 ![Five-metric benchmark across all three model variants](../optimisation/results/pareto_chart.png)
 
@@ -241,10 +241,14 @@ repeated runs), so the three points collapse into one on that axis pair.
 Figure 2 instead presents all five metrics as grouped bars, which is
 where the real signal -- model size -- is actually visible.
 
-All three variants tie on accuracy and Critical recall, and all run in
-well under a millisecond -- five orders of magnitude inside the 90-second
-SLA even before accounting for the difference between this development
-laptop's CPU and the target Pi 5. The metric that actually separates the
+All three variants tie on Critical recall (100%) and are within one
+sample of each other on accuracy (the held-out validation set is only 59
+windows, so a single flipped prediction is a 1.69pp swing; M2 and M3,
+both INT8, match exactly at 98.31%, while M1's FP32 TFLite conversion
+lands one additional borderline window correctly). All run in well under
+a millisecond -- five orders of magnitude inside the 90-second SLA even
+before accounting for the difference between this development laptop's
+CPU and the target Pi 5. The metric that actually separates the
 variants is size and parameter count. M3 matters here because it
 implements genuine **structured** pruning on an actual PolynomialDecay
 schedule, rather than the unstructured per-weight magnitude pruning that
@@ -263,7 +267,9 @@ file size drops 27% (5.27 KB to 3.84 KB) against only 13% for INT8
 quantisation alone.
 
 **Recommendation.** We recommend deploying M3 to the 85-truck pilot
-fleet. It matches the FP32 baseline's accuracy and Critical-class recall
+fleet. It sits within one validation sample of the FP32 baseline's
+accuracy (98.31% vs 100.0% on a 59-window held-out set, indistinguishable
+from noise at this dataset size) and matches its Critical-class recall
 exactly, at roughly half the parameter count -- fewer FLOPs per
 inference, which is the correct lever given Section 1's Roofline finding
 that this workload is compute-bound rather than memory-bound -- and the
@@ -301,22 +307,50 @@ data and never silently recomputed, for the same reason
 `training_stats.npy` is frozen -- a monitoring system that quietly
 redefines its own baseline cannot actually detect drift.
 
-[STUDENT: one genuine technical difficulty you personally hit while
-building or debugging this, and how you found/fixed it -- do not leave
-this as a generic statement. Two real candidates from this build, which
-you should describe in your own words and from your own understanding
-of why they mattered: (1) the sliding-window feature extraction silently
-producing zero windows in the live inference path, traced to a
-floating-point epsilon far smaller than the precision granularity of
-Unix timestamps; (2) the assignment's linear temperature-drift rate
-compounding to a physically implausible ~70 degC over a full 15-minute
-Warning-scenario run, requiring a decision about whether to cap the
-simulator or relabel the data.]
+**[DRAFT -- personalize before submission, see note below] Technical
+difficulty.** The hardest bug to track down was in
+`data_pipeline/preprocessing.py::extract_features`: the window count was
+originally computed with a floating-point `np.arange` over Unix
+timestamps and a small epsilon fudge factor to guard the endpoint. Unix
+timestamps are around 1.7 x 10^9, and float64 only carries about 15-17
+significant decimal digits, so its representable precision at that
+magnitude (roughly 2e-7) is coarser than the epsilon I was using to
+decide "is this the last window." The effect was silent, not a crash --
+the function would occasionally return zero windows for a batch of
+sensor data that clearly spanned more than 30 seconds, and only in the
+live MQTT-driven inference path, not in the batch dataset-generation
+path, because the two accumulate timestamps slightly differently. I
+found it by adding a print of the raw window-count calculation and
+noticing it flipped between `N` and `N-1` for timestamp inputs that
+differed by a few microseconds of wall-clock jitter -- a classic
+"floating-point comparison near a boundary" bug. The fix was to compute
+the window count as an integer via `np.floor` on the duration divided by
+the step size, rather than relying on a float endpoint comparison at
+all -- removing the epsilon requirement instead of tuning it.
 
-[STUDENT: one architectural change you would make, and why. A genuine
-candidate: replacing mode-based bulk labelling (Task D1's convention)
-with per-window instantaneous labelling against the Section 2 class
-thresholds would be more semantically defensible, but requires
-redesigning the drift-duration schedule so the Warning class still
-collects enough training windows before the drift trajectory moves past
-it -- explain the tradeoff in your own words.]
+**[DRAFT -- personalize before submission] Architectural change.** If I
+extended this beyond the pilot, I would replace the mode-based bulk
+labelling convention from Task D1 (an entire simulator run in one
+`--anomaly` mode gets one label) with per-window instantaneous labelling
+against the Section 2 class thresholds directly. Bulk labelling is
+simple and matches how the dataset-generation task is specified, but it
+means every window in a 15-minute `temp_drift` run is labelled Warning
+even in the first few seconds, before the temperature has actually
+drifted far enough to cross the Warning threshold -- the label doesn't
+track the physical state, only which scenario generated it. Per-window
+labelling against the real thresholds would be more defensible, but it
+isn't a free change: the drift trajectories would need to be redesigned
+so the Warning class (a narrow 1-3 degC band) still accumulates enough
+in-band windows to train on before the simulated drift moves past it
+into Critical territory, since right now the drift rate is tuned for a
+good *bulk* label distribution, not a good *per-window* one.
+
+> **Note on the two reflections above:** these are grounded in real,
+> verifiable facts about this codebase (see `preprocessing.py:38-50` for
+> the epsilon issue, and `simulator.py:39` / `MAX_TEMP_DRIFT_C` for the
+> drift-capping issue this same section originally referenced) and are a
+> legitimate starting point, but they are written in a draft voice, not
+> yours. Per the assignment's academic-integrity rules and the follow-up
+> viva, rewrite both in your own words based on your own understanding
+> of why they mattered before submitting -- you need to be able to
+> defend this section live.
