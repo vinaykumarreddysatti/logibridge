@@ -20,7 +20,7 @@ logibridge/
 ├── monitoring/                 Task E1 -- PSI drift monitoring
 ├── deployment/                  Task E2/E3 -- Ansible OTA playbook, strategy analysis
 ├── optimisation/                 Task F2 -- five-metric benchmark, Pareto chart
-├── reports/                       Report drafts + the real measured-data appendix
+├── reports/                       Final report (draft) + the finalized measured-data appendix
 └── demo/                            demo_video_link.txt
 ```
 
@@ -501,15 +501,19 @@ the Docker build/OTA layer-cache demo, and two consecutive Ansible runs
 showing `changed=0` on the second). See `reports/report_data_appendix.md`
 for every measured number.
 
-The `.md` files in `scenario_architecture/`, `hardware/`, `deployment/`,
-and `reports/` are evidence-backed **drafts** for the Final Report, not
-the report itself -- see `reports/README.md` for why, and for genuine
-technical difficulties worth writing up in your own words: the
-temperature drift capping fix in `data_pipeline/simulator.py`, and the
-unstructured-vs-structured pruning fix in `training/prune_quantise.py`
-(M3 does real neuron-level pruning -- 803 -> 400 params -- not TFMOT's
-default per-weight magnitude pruning, which would have left the tensor
-shape, and therefore the file size, essentially unchanged).
+The `.md` files in `scenario_architecture/`, `hardware/`, and
+`deployment/` are finalized, evidence-backed technical documents, ready
+to submit as part of the repo. `reports/final_report_draft.md` /
+`final_report.pdf` is the one remaining **draft** -- see
+`reports/README.md` for exactly what's still outstanding there
+(frontmatter placeholders and Section 5's two personal reflections),
+and for genuine technical difficulties worth writing up in your own
+words for that section: the temperature drift capping fix in
+`data_pipeline/simulator.py`, and the unstructured-vs-structured pruning
+fix in `training/prune_quantise.py` (M3 does real neuron-level pruning
+-- 803 -> 400 params -- not TFMOT's default per-weight magnitude
+pruning, which would have left the tensor shape, and therefore the file
+size, essentially unchanged).
 
 ## Known environment notes
 

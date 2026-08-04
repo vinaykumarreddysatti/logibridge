@@ -1,6 +1,4 @@
-# Task D3 -- 10-Stage Edge ML Pipeline Mapping (evidence draft)
-
-> Rewrite in your own words for Final Report Section 3.
+# Task D3 -- 10-Stage Edge ML Pipeline Mapping
 
 1. **Data collection** -- `data_pipeline/simulator.py` publishes temperature
    (1 Hz), vibration (0.5 Hz) and door events over MQTT, standing in for

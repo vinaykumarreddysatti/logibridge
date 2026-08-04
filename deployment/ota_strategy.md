@@ -1,6 +1,4 @@
-# Task E3 -- OTA Strategy Selection (evidence draft)
-
-> Rewrite in your own words for the Final Report -- see the note in `reports/`.
+# Task E3 -- OTA Strategy Selection
 
 **Given:** model updates every 6 weeks, model file 280 KB (INT8 TFLite),
 M2M SIM at ₹0.10/MB, 85-truck pilot fleet.

@@ -1,6 +1,4 @@
-# Task B1/B2 -- Hardware Selection and Roofline Analysis (evidence draft)
-
-> Rewrite in your own words for the Final Report -- see the note in `reports/`.
+# Task B1/B2 -- Hardware Selection and Roofline Analysis
 
 ## Task B1 -- Constraint Triangle
 

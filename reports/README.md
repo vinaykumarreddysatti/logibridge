@@ -10,34 +10,36 @@ with no mention of separate phase deliverables. Phase 1/2, if they
 exist, were earlier Continuous Evaluation checkpoints submitted
 separately during the course, not part of this final repo submission.
 
-## What's here now vs. what you need to add
+## Status
 
-- `report_data_appendix.md` -- every number in this file came from actually
-  running the code in this repo (training runs, benchmarks, the drift
-  demo, the Ansible runs, etc.). It's real, measured evidence, not
-  estimates.
-- `pipeline_mapping.md` -- a first-pass Task D3 mapping.
-- The `.md` drafts in `scenario_architecture/`, `hardware/`, and
-  `deployment/` are similarly evidence-backed first drafts for their
-  respective report sections.
+- `report_data_appendix.md` -- finalized. Every number in this file came
+  from actually running the code in this repo (training runs, benchmarks,
+  the drift demo, the Ansible runs, etc.) and has been reconciled against
+  the current `optimisation/results/benchmark_results.csv`.
+- `pipeline_mapping.md` -- finalized Task D3 mapping.
+- The supporting `.md` files in `scenario_architecture/`, `hardware/`, and
+  `deployment/` (constraint analysis, hardware justification, system
+  architecture, OTA strategy) are finalized, evidence-backed technical
+  documents -- ready to submit as part of the repo.
+- `final_report_draft.md` / `final_report.pdf` -- **still a draft.** This
+  is the one file that isn't submission-ready. The assignment is explicit
+  that:
 
-**None of these are the Final Report.** The assignment is explicit that:
+  > "Generating the Final Report exclusively through an AI writing tool
+  > without substantial original analysis and measured data" constitutes
+  > academic misconduct, and you must be able to explain any component of
+  > your submission in a follow-up viva.
 
-> "Generating the Final Report exclusively through an AI writing tool
-> without substantial original analysis and measured data" constitutes
-> academic misconduct, and you must be able to explain any component of
-> your submission in a follow-up viva.
+  Sections 1-4 are close to final (condensed from the finalized supporting
+  documents above, with real measured numbers). What's still outstanding:
+  the frontmatter placeholders (`GROUPNO`, name(s), submission date), and
+  Section 5's two `[DRAFT -- personalize before submission]` reflections
+  -- "one genuine technical difficulty" and "one architectural change you
+  would make" are personal reflections that only you can write honestly,
+  and the ones currently in the draft are written in a draft voice, not
+  yours. Delete the DRAFT NOTICE banner at the top only once that's done.
 
-The data in this appendix is genuine (every model was actually trained,
-every benchmark actually run, every Ansible playbook actually executed
-twice) -- that's the "measured data" half of the requirement. The
-"substantial original analysis" half is yours to write: the 5-section,
-2,500-3,000 word Final Report needs your own explanation of *why* these
-numbers matter, your own phrasing, and in particular Section 5's "one
-genuine technical difficulty" and "one architectural change you would
-make" are personal reflections that only you can write honestly.
-
-Two difficulties you may want to draw on for that section, since they're
+Two difficulties you may want to draw on for Section 5, since they're
 real ones this build surfaced:
 
 1. The assignment's linear temperature-drift rate (0.08 C/reading) run
