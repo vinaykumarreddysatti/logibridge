@@ -8,6 +8,14 @@ The **LogiEdge** platform implements a decoupled, event-driven edge intelligence
 
 ## 1. System Architecture Diagram
 
+Rendered version (for viewers without Mermaid support, e.g. plain
+markdown/PDF viewers):
+
+![LogiEdge system architecture, truck edge node to ops centre](system_architecture.png)
+
+Mermaid source (renders natively on GitHub, and lets you edit the
+diagram directly instead of re-drawing it):
+
 ```mermaid
 flowchart TB
     subgraph SENSORS ["1. On-Vehicle Physical Sensors"]

@@ -4,7 +4,7 @@
 
 ## Task B1 -- Constraint Triangle
 
-![Constraint Triangle](../scenario_architecture/constraint_triangle.svg)
+![Constraint Triangle](./constraint_triangle.svg)
 
 | Option | Hardware | Price/truck | TDP | 85-truck pilot cost | 265-truck fleet cost |
 |---|---|---|---|---|---|
