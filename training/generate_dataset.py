@@ -4,7 +4,15 @@ window in that run with the class the mode represents.
 
   Class 0 Normal    --anomaly none        20 min  ~120 windows
   Class 1 Warning   --anomaly temp_drift  15 min  ~90 windows
+  Class 1 Warning   --anomaly vibration   15 min  ~90 windows
   Class 2 Critical  --anomaly combined    15 min  ~90 windows
+
+A standalone bearing-wear vibration anomaly (temp unaffected) is a real
+mechanical fault precursor just like temp_drift alone, so it is labelled
+Warning too -- without this, the model never sees a "temp normal / vib
+anomalous" window during training and silently classifies live
+vibration-only faults as Normal (temp features dominate the learned
+boundary otherwise).
 
 Note (see reports/ for the fuller writeup): the simulator's linear
 temperature drift (+0.08C/reading, Task C1) run for a full 15-minute
@@ -29,6 +37,7 @@ from preprocessing import extract_features  # noqa: E402
 CLASSES = [
     (0, "none", 20 * 60),
     (1, "temp_drift", 15 * 60),
+    (1, "vibration", 15 * 60),
     (2, "combined", 15 * 60),
 ]
 
@@ -37,8 +46,11 @@ def build_dataset(seed=42, out_dir=None):
     out_dir = out_dir or os.path.dirname(__file__)
     all_X, all_y = [], []
     t_cursor = 0.0
-    for label, mode, duration in CLASSES:
-        series = generate_offline_series(mode, duration, seed=seed + label, start_ts=t_cursor)
+    for i, (label, mode, duration) in enumerate(CLASSES):
+        # Seed by scenario index, not label: multiple scenarios now share
+        # the same label (temp_drift and vibration are both Warning) and
+        # must not draw identical RNG streams.
+        series = generate_offline_series(mode, duration, seed=seed + i, start_ts=t_cursor)
         temp_ts, temp_vals = series["temperature"]
         vib_ts, vib_vals = series["vibration"]
         _, feats = extract_features(temp_ts, temp_vals, vib_ts, vib_vals)
