@@ -15,6 +15,14 @@
     image_name: "localhost:5050/logibridge-inference:latest"
     container_name: logibridge-inference
 
+  # community.docker modules default to unix:///var/run/docker.sock and,
+  # unlike the docker CLI, don't read the Docker Desktop context config --
+  # on macOS the real socket lives under ~/.docker/run/docker.sock, so it
+  # must be pointed there explicitly (also covers task 7's `docker inspect`
+  # shell call, which honours the same env var).
+  environment:
+    DOCKER_HOST: "unix://{{ ansible_env.HOME }}/.docker/run/docker.sock"
+
   tasks:
     - name: 1. Create /opt/logibridge directory if not present
       ansible.builtin.file:

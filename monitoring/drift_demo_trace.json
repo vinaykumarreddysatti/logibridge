@@ -2,223 +2,223 @@
   {
     "index": 100,
     "phase": "clean_before",
-    "psi": 0.0574,
+    "psi": 0.0649,
     "seconds_since_injection": -470
   },
   {
     "index": 106,
     "phase": "clean_before",
-    "psi": 0.0638,
+    "psi": 0.0493,
     "seconds_since_injection": -410
   },
   {
     "index": 112,
     "phase": "clean_before",
-    "psi": 0.0474,
+    "psi": 0.0493,
     "seconds_since_injection": -350
   },
   {
     "index": 118,
     "phase": "clean_before",
-    "psi": 0.0256,
+    "psi": 0.0361,
     "seconds_since_injection": -290
   },
   {
     "index": 124,
     "phase": "clean_before",
-    "psi": 0.0145,
+    "psi": 0.0442,
     "seconds_since_injection": -230
   },
   {
     "index": 130,
     "phase": "clean_before",
-    "psi": 0.0236,
+    "psi": 0.0548,
     "seconds_since_injection": -170
   },
   {
     "index": 136,
     "phase": "clean_before",
-    "psi": 0.0701,
+    "psi": 0.0548,
     "seconds_since_injection": -110
   },
   {
     "index": 142,
     "phase": "clean_before",
-    "psi": 0.0756,
+    "psi": 0.0447,
     "seconds_since_injection": -50
   },
   {
     "index": 148,
     "phase": "drift_injected",
-    "psi": 0.0547,
+    "psi": 0.0361,
     "seconds_since_injection": 10
   },
   {
     "index": 154,
     "phase": "drift_injected",
-    "psi": 0.047,
+    "psi": 0.108,
     "seconds_since_injection": 70
   },
   {
     "index": 160,
     "phase": "drift_injected",
-    "psi": 0.1102,
+    "psi": 0.1952,
     "seconds_since_injection": 130
   },
   {
     "index": 166,
     "phase": "drift_injected",
-    "psi": 0.1924,
+    "psi": 0.3097,
     "seconds_since_injection": 190
   },
   {
     "index": 172,
     "phase": "drift_injected",
-    "psi": 0.3031,
+    "psi": 0.3612,
     "seconds_since_injection": 250
   },
   {
     "index": 178,
     "phase": "drift_injected",
-    "psi": 0.3927,
+    "psi": 0.5037,
     "seconds_since_injection": 310
   },
   {
     "index": 184,
     "phase": "drift_injected",
-    "psi": 0.5398,
+    "psi": 0.6856,
     "seconds_since_injection": 370
   },
   {
     "index": 190,
     "phase": "drift_injected",
-    "psi": 0.7417,
+    "psi": 0.8944,
     "seconds_since_injection": 430
   },
   {
     "index": 196,
     "phase": "drift_injected",
-    "psi": 0.9512,
+    "psi": 1.0881,
     "seconds_since_injection": 490
   },
   {
     "index": 202,
     "phase": "drift_injected",
-    "psi": 1.1985,
+    "psi": 1.3709,
     "seconds_since_injection": 550
   },
   {
     "index": 208,
     "phase": "recovery",
-    "psi": 1.2903,
+    "psi": 1.5675,
     "seconds_since_injection": 610
   },
   {
     "index": 214,
     "phase": "recovery",
-    "psi": 1.2974,
+    "psi": 1.5059,
     "seconds_since_injection": 670
   },
   {
     "index": 220,
     "phase": "recovery",
-    "psi": 1.2049,
+    "psi": 1.3101,
     "seconds_since_injection": 730
   },
   {
     "index": 226,
     "phase": "recovery",
-    "psi": 1.2477,
+    "psi": 1.3574,
     "seconds_since_injection": 790
   },
   {
     "index": 232,
     "phase": "recovery",
-    "psi": 1.2921,
+    "psi": 1.3574,
     "seconds_since_injection": 850
   },
   {
     "index": 238,
     "phase": "recovery",
-    "psi": 1.3607,
+    "psi": 1.4058,
     "seconds_since_injection": 910
   },
   {
     "index": 244,
     "phase": "recovery",
-    "psi": 1.2397,
+    "psi": 1.3634,
     "seconds_since_injection": 970
   },
   {
     "index": 250,
     "phase": "recovery",
-    "psi": 1.1347,
+    "psi": 1.2821,
     "seconds_since_injection": 1030
   },
   {
     "index": 256,
     "phase": "recovery",
-    "psi": 0.9577,
+    "psi": 1.1004,
     "seconds_since_injection": 1090
   },
   {
     "index": 262,
     "phase": "recovery",
-    "psi": 0.7343,
+    "psi": 0.8691,
     "seconds_since_injection": 1150
   },
   {
     "index": 268,
     "phase": "recovery",
-    "psi": 0.5398,
+    "psi": 0.6513,
     "seconds_since_injection": 1210
   },
   {
     "index": 274,
     "phase": "recovery",
-    "psi": 0.4008,
+    "psi": 0.4916,
     "seconds_since_injection": 1270
   },
   {
     "index": 280,
     "phase": "recovery",
-    "psi": 0.3223,
+    "psi": 0.3511,
     "seconds_since_injection": 1330
   },
   {
     "index": 286,
     "phase": "recovery",
-    "psi": 0.2181,
+    "psi": 0.2302,
     "seconds_since_injection": 1390
   },
   {
     "index": 292,
     "phase": "recovery",
-    "psi": 0.1487,
+    "psi": 0.1129,
     "seconds_since_injection": 1450
   },
   {
     "index": 298,
     "phase": "recovery",
-    "psi": 0.1014,
+    "psi": 0.0315,
     "seconds_since_injection": 1510
   },
   {
     "index": 304,
     "phase": "recovery",
-    "psi": 0.0725,
+    "psi": 0.0008,
     "seconds_since_injection": 1570
   },
   {
     "index": 310,
     "phase": "recovery",
-    "psi": 0.0879,
+    "psi": 0.0034,
     "seconds_since_injection": 1630
   },
   {
     "index": 316,
     "phase": "recovery",
-    "psi": 0.0829,
+    "psi": 0.0072,
     "seconds_since_injection": 1690
   }
 ]

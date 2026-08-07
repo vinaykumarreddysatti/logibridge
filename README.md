@@ -20,7 +20,7 @@ logibridge/
 ├── monitoring/                 Task E1 -- PSI drift monitoring
 ├── deployment/                  Task E2/E3 -- Ansible OTA playbook, strategy analysis
 ├── optimisation/                 Task F2 -- five-metric benchmark, Pareto chart
-├── reports/                       Final report (draft) + the finalized measured-data appendix
+├── reports/                       Phase 1, Phase 2 + Final reports (.md sources -> PDFs via build_pdfs.sh)
 └── demo/                            demo_video_link.txt
 ```
 
@@ -203,7 +203,7 @@ via `MODEL_PATH`, which exists precisely to make this kind of swap
 possible without a rebuild.
 
 **Whenever you retrain** (`train_model.py`/`convert_ptq.py` are
-unseeded -- see "What's real vs. what's a draft" -- so every retrain
+unseeded -- see "What's real (measured) in this repo" -- so every retrain
 produces different weights and therefore a different confidence
 calibration), `monitoring/reference_dist.json` goes stale immediately.
 Symptoms of a stale reference: PSI reads elevated (or wildly high, e.g.
@@ -380,7 +380,7 @@ scratch:
 ```
 
 It only removes generated outputs -- source scripts, `deployment/`
-configs and certs, report drafts, `demo/demo_video_link.txt`, and the
+configs and certs, the reports, `demo/demo_video_link.txt`, and the
 venv are untouched. After running it, `inference/model.tflite` and
 `monitoring/reference_dist.json` will need regenerating before the live
 PSI demo works again (see "PSI drift monitoring: which model, and why",
@@ -489,7 +489,7 @@ sufficient for the pilot; using the NPU would mean converting the model
 via the Hailo Dataflow Compiler to a `.hef` file and swapping in the
 Hailo runtime, which is out of scope for this assignment.
 
-## What's real vs. what's a draft
+## What's real (measured) in this repo
 
 Every script in this repo has been run and its output verified (dataset
 generation, training against the 88%/95% gates, all three TFLite
@@ -498,22 +498,20 @@ over *both* the plaintext dev broker and the TLS+auth production broker
 with role-scoped credentials -- including two negative tests confirming
 the ACLs actually reject out-of-scope publishes, not just declare them --
 the Docker build/OTA layer-cache demo, and two consecutive Ansible runs
-showing `changed=0` on the second). See `reports/report_data_appendix.md`
-for every measured number.
+showing `changed=0` on the second). Every measured number appears in the
+reports themselves (`reports/final_report.pdf` and the two phase
+reports), reconciled against the current artifacts.
 
 The `.md` files in `scenario_architecture/`, `hardware/`, and
-`deployment/` are finalized, evidence-backed technical documents, ready
-to submit as part of the repo. `reports/final_report_draft.md` /
-`final_report.pdf` is the one remaining **draft** -- see
-`reports/README.md` for exactly what's still outstanding there
-(frontmatter placeholders and Section 5's two personal reflections),
-and for genuine technical difficulties worth writing up in your own
-words for that section: the temperature drift capping fix in
-`data_pipeline/simulator.py`, and the unstructured-vs-structured pruning
-fix in `training/prune_quantise.py` (M3 does real neuron-level pruning
--- 803 -> 400 params -- not TFMOT's default per-weight magnitude
-pruning, which would have left the tensor shape, and therefore the file
-size, essentially unchanged).
+`deployment/` are finalized, evidence-backed technical documents, and
+`reports/` holds the finalized Phase 1, Phase 2, and Final reports with
+their editable Markdown sources (`reports/build_pdfs.sh` regenerates the
+PDFs). Two genuine engineering findings documented along the way: the
+temperature drift capping fix in `data_pipeline/simulator.py`, and the
+unstructured-vs-structured pruning fix in `training/prune_quantise.py`
+(M3 does real neuron-level pruning -- 803 -> 400 params -- not TFMOT's
+default per-weight magnitude pruning, which would have left the tensor
+shape, and therefore the file size, essentially unchanged).
 
 ## Known environment notes
 
